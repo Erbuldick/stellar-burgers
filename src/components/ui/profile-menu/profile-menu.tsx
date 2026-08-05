@@ -5,7 +5,7 @@ import { ProfileMenuUIProps } from './type';
 
 export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
   pathname,
-  handleLogout
+  handleLogout,
 }) => (
   <>
     <NavLink

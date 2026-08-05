@@ -2,7 +2,7 @@ import React, { FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   CurrencyIcon,
-  FormattedDate
+  FormattedDate,
 } from '@zlden/react-developer-burger-ui-components';
 
 import styles from './order-card.module.css';
@@ -48,7 +48,7 @@ export const OrderCardUI: FC<OrderCardUIProps> = memo(
                     opacity:
                       orderInfo.remains && maxIngredients === index + 1
                         ? '0.5'
-                        : '1'
+                        : '1',
                   }}
                   className={styles.img}
                   src={ingredient.image_mobile}

@@ -1,10 +1,10 @@
 import { setCookie, getCookie } from './cookie';
-import { TIngredient, TOrder, TOrdersData, TUser } from './types';
+import { TIngredient, TOrder, TUser } from './types';
 
 const URL = process.env.BURGER_API_URL;
 
 const checkResponse = <T>(res: Response): Promise<T> =>
-  res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+  res.ok ? res.json() : res.json().then(err => Promise.reject(err));
 
 type TServerResponse<T> = {
   success: boolean;
@@ -19,14 +19,14 @@ export const refreshToken = (): Promise<TRefreshResponse> =>
   fetch(`${URL}/auth/token`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     },
     body: JSON.stringify({
-      token: localStorage.getItem('refreshToken')
-    })
+      token: localStorage.getItem('refreshToken'),
+    }),
   })
-    .then((res) => checkResponse<TRefreshResponse>(res))
-    .then((refreshData) => {
+    .then(res => checkResponse<TRefreshResponse>(res))
+    .then(refreshData => {
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
@@ -67,22 +67,18 @@ type TFeedsResponse = TServerResponse<{
   totalToday: number;
 }>;
 
-type TOrdersResponse = TServerResponse<{
-  data: TOrder[];
-}>;
-
 export const getIngredientsApi = () =>
   fetch(`${URL}/ingredients`)
-    .then((res) => checkResponse<TIngredientsResponse>(res))
-    .then((data) => {
+    .then(res => checkResponse<TIngredientsResponse>(res))
+    .then(data => {
       if (data?.success) return data.data;
       return Promise.reject(data);
     });
 
 export const getFeedsApi = () =>
   fetch(`${URL}/orders/all`)
-    .then((res) => checkResponse<TFeedsResponse>(res))
-    .then((data) => {
+    .then(res => checkResponse<TFeedsResponse>(res))
+    .then(data => {
       if (data?.success) return data;
       return Promise.reject(data);
     });
@@ -92,9 +88,9 @@ export const getOrdersApi = () =>
     method: 'GET',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      authorization: getCookie('accessToken')
-    } as HeadersInit
-  }).then((data) => {
+      authorization: getCookie('accessToken'),
+    } as HeadersInit,
+  }).then(data => {
     if (data?.success) return data.orders;
     return Promise.reject(data);
   });
@@ -127,12 +123,12 @@ export const orderBurgerApi = (data: string[]) =>
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      authorization: getCookie('accessToken')
+      authorization: getCookie('accessToken'),
     } as HeadersInit,
     body: JSON.stringify({
-      ingredients: data
-    })
-  }).then((data) => {
+      ingredients: data,
+    }),
+  }).then(data => {
     if (data?.success) return data;
     return Promise.reject(data);
   });
@@ -145,9 +141,9 @@ export const getOrderByNumberApi = (number: number) =>
   fetch(`${URL}/orders/${number}`, {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then((res) => checkResponse<TOrderResponse>(res));
+      'Content-Type': 'application/json',
+    },
+  }).then(res => checkResponse<TOrderResponse>(res));
 
 export type TRegisterData = {
   email: string;
@@ -165,12 +161,12 @@ export const registerUserApi = (data: TRegisterData) =>
   fetch(`${URL}/auth/register`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
-    .then((res) => checkResponse<TAuthResponse>(res))
-    .then((data) => {
+    .then(res => checkResponse<TAuthResponse>(res))
+    .then(data => {
       if (data?.success) return data;
       return Promise.reject(data);
     });
@@ -184,12 +180,12 @@ export const loginUserApi = (data: TLoginData) =>
   fetch(`${URL}/auth/login`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
-    .then((res) => checkResponse<TAuthResponse>(res))
-    .then((data) => {
+    .then(res => checkResponse<TAuthResponse>(res))
+    .then(data => {
       if (data?.success) return data;
       return Promise.reject(data);
     });
@@ -198,12 +194,12 @@ export const forgotPasswordApi = (data: { email: string }) =>
   fetch(`${URL}/password-reset`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
-    .then((res) => checkResponse<TServerResponse<{}>>(res))
-    .then((data) => {
+    .then(res => checkResponse<TServerResponse<{}>>(res))
+    .then(data => {
       if (data?.success) return data;
       return Promise.reject(data);
     });
@@ -212,12 +208,12 @@ export const resetPasswordApi = (data: { password: string; token: string }) =>
   fetch(`${URL}/password-reset/reset`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
-    .then((res) => checkResponse<TServerResponse<{}>>(res))
-    .then((data) => {
+    .then(res => checkResponse<TServerResponse<{}>>(res))
+    .then(data => {
       if (data?.success) return data;
       return Promise.reject(data);
     });
@@ -227,8 +223,8 @@ type TUserResponse = TServerResponse<{ user: TUser }>;
 export const getUserApi = () =>
   fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {
     headers: {
-      authorization: getCookie('accessToken')
-    } as HeadersInit
+      authorization: getCookie('accessToken'),
+    } as HeadersInit,
   });
 
 export const updateUserApi = (user: Partial<TRegisterData>) =>
@@ -236,18 +232,18 @@ export const updateUserApi = (user: Partial<TRegisterData>) =>
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
-      authorization: getCookie('accessToken')
+      authorization: getCookie('accessToken'),
     } as HeadersInit,
-    body: JSON.stringify(user)
+    body: JSON.stringify(user),
   });
 
 export const logoutApi = () =>
   fetch(`${URL}/auth/logout`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8'
+      'Content-Type': 'application/json;charset=utf-8',
     },
     body: JSON.stringify({
-      token: localStorage.getItem('refreshToken')
-    })
-  }).then((res) => checkResponse<TServerResponse<{}>>(res));
+      token: localStorage.getItem('refreshToken'),
+    }),
+  }).then(res => checkResponse<TServerResponse<{}>>(res));
