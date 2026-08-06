@@ -6,7 +6,7 @@ import {
   getUserApi,
   updateUserApi,
   TLoginData,
-  TRegisterData,
+  TRegisterData
 } from '../../utils/burger-api';
 import { setCookie, deleteCookie } from '../../utils/cookie';
 import { TUser } from '../../utils/types';
@@ -62,7 +62,7 @@ const initialState: IUserState = {
   user: null,
   isAuthenticated: false,
   loading: false,
-  error: null,
+  error: null
 };
 
 const userSlice = createSlice({
@@ -72,11 +72,11 @@ const userSlice = createSlice({
     clearUser(state) {
       state.user = null;
       state.isAuthenticated = false;
-    },
+    }
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(loginUser.pending, state => {
+      .addCase(loginUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -89,7 +89,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Ошибка входа';
       })
-      .addCase(registerUser.pending, state => {
+      .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -105,12 +105,12 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Ошибка регистрации';
       })
-      .addCase(logoutUser.fulfilled, state => {
+      .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
         state.isAuthenticated = false;
         state.error = null;
       })
-      .addCase(fetchUser.pending, state => {
+      .addCase(fetchUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -123,7 +123,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Ошибка загрузки пользователя';
       })
-      .addCase(updateUser.pending, state => {
+      .addCase(updateUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -135,7 +135,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Ошибка обновления данных';
       });
-  },
+  }
 });
 
 export const { clearUser } = userSlice.actions;

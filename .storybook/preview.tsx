@@ -8,19 +8,19 @@ const preview: Preview = {
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
+        date: /Date$/i
+      }
+    }
   },
   decorators: [
-    Story => (
+    (Story) => (
       <BrowserRouter>
         <div style={{ padding: 20, width: 'fit-content' }}>
           <Story />
         </div>
       </BrowserRouter>
-    ),
-  ],
+    )
+  ]
 };
 
 export default preview;

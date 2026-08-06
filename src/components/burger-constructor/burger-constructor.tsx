@@ -2,12 +2,12 @@ import { FC, useMemo } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
 import {
   selectConstructor,
-  clearConstructor,
+  clearConstructor
 } from '../../services/slices/constructorSlice';
 import {
   createOrder,
   selectOrder,
-  closeOrder,
+  closeOrder
 } from '../../services/slices/orderSlice';
 import { selectIsAuthenticated } from '../../services/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
@@ -20,13 +20,13 @@ export const BurgerConstructor: FC = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const constructorState = useSelector(selectConstructor) || {
     bun: null,
-    ingredients: [],
+    ingredients: []
   };
   const bun = constructorState.bun;
   const ingredients = constructorState.ingredients || [];
   const { order, loading: orderRequest } = useSelector(selectOrder) || {
     order: null,
-    loading: false,
+    loading: false
   };
 
   const onOrderClick = () => {
@@ -39,6 +39,7 @@ export const BurgerConstructor: FC = () => {
     const orderIds = [
       bun._id,
       ...ingredients.map((item: TConstructorIngredient) => item._id),
+      bun._id
     ];
     dispatch(createOrder(orderIds))
       .unwrap()

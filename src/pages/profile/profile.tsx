@@ -10,16 +10,15 @@ export const Profile: FC = () => {
   const [formValue, setFormValue] = useState({
     name: user?.name || '',
     email: user?.email || '',
-    password: '',
+    password: ''
   });
 
-  
   useEffect(() => {
     if (user) {
       setFormValue({
         name: user.name,
         email: user.email,
-        password: '',
+        password: ''
       });
     }
   }, [user]);
@@ -31,7 +30,7 @@ export const Profile: FC = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    
+
     const updatedData: { name?: string; email?: string; password?: string } =
       {};
     if (formValue.name !== user?.name) updatedData.name = formValue.name;
@@ -46,14 +45,14 @@ export const Profile: FC = () => {
     setFormValue({
       name: user?.name || '',
       email: user?.email || '',
-      password: '',
+      password: ''
     });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormValue(prevState => ({
+    setFormValue((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     }));
   };
 

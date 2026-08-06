@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import {
   Button,
   ConstructorElement,
-  CurrencyIcon,
+  CurrencyIcon
 } from '@zlden/react-developer-burger-ui-components';
 import styles from './burger-constructor.module.css';
 import { BurgerConstructorUIProps } from './type';
@@ -16,7 +16,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   price,
   orderModalData,
   onOrderClick,
-  closeOrderModal,
+  closeOrderModal
 }) => (
   <section className={styles.burger_constructor}>
     {constructorItems.bun ? (

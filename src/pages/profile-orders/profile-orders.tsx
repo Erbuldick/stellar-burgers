@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
 import {
   fetchProfileOrders,
-  selectProfileOrders,
+  selectProfileOrders
 } from '../../services/slices/profileOrdersSlice';
 import { ProfileOrdersUI } from '@ui-pages';
 import { Preloader } from '@ui';

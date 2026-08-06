@@ -9,7 +9,7 @@ export const ForgotPasswordUI: FC<PageUIProps> = ({
   errorText,
   email,
   setEmail,
-  handleSubmit,
+  handleSubmit
 }) => (
   <main className={styles.container}>
     <div className={`pt-6 ${styles.wrapCenter}`}>
@@ -23,7 +23,7 @@ export const ForgotPasswordUI: FC<PageUIProps> = ({
           <Input
             type='email'
             placeholder='Укажите e-mail'
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             value={email}
             name='email'
             error={false}

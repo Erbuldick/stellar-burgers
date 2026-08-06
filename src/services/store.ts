@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
-  useSelector as selectorHook,
+  useSelector as selectorHook
 } from 'react-redux';
 import ingredientsReducer from './slices/ingredientsSlice';
 import userReducer from './slices/userSlice';
@@ -19,16 +19,16 @@ const rootReducer = {
   order: orderReducer,
   feed: feedReducer,
   profileOrders: profileOrdersReducer,
-  orderDetails: orderDetailsReducer,
+  orderDetails: orderDetailsReducer
 };
 
 const store = configureStore({
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production',
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+      serializableCheck: false
+    })
 });
 
 export type RootState = ReturnType<typeof store.getState>;

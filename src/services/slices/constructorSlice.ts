@@ -8,7 +8,7 @@ interface IConstructorState {
 
 const initialState: IConstructorState = {
   bun: null,
-  ingredients: [],
+  ingredients: []
 };
 
 const constructorSlice = createSlice({
@@ -22,14 +22,14 @@ const constructorSlice = createSlice({
       } else {
         const constructorIngredient: TConstructorIngredient = {
           ...ingredient,
-          id: crypto.randomUUID(),
+          id: crypto.randomUUID()
         };
         state.ingredients.push(constructorIngredient);
       }
     },
     removeIngredient: (state, action: PayloadAction<string>) => {
       state.ingredients = state.ingredients.filter(
-        item => item.id !== action.payload
+        (item) => item.id !== action.payload
       );
     },
     moveIngredient: (
@@ -40,18 +40,18 @@ const constructorSlice = createSlice({
       const [removed] = state.ingredients.splice(from, 1);
       state.ingredients.splice(to, 0, removed);
     },
-    clearConstructor: state => {
+    clearConstructor: (state) => {
       state.bun = null;
       state.ingredients = [];
-    },
-  },
+    }
+  }
 });
 
 export const {
   addIngredient,
   removeIngredient,
   moveIngredient,
-  clearConstructor,
+  clearConstructor
 } = constructorSlice.actions;
 
 export const selectConstructor = (state: {

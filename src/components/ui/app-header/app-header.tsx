@@ -6,13 +6,12 @@ import {
   BurgerIcon,
   ListIcon,
   Logo,
-  ProfileIcon,
+  ProfileIcon
 } from '@zlden/react-developer-burger-ui-components';
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
-  
   const setActiveClass = ({ isActive }: { isActive: boolean }) =>
-    isActive ? `${styles.link} ${styles.active}` : styles.link;
+    isActive ? `${styles.link} ${styles.link_active}` : styles.link;
 
   return (
     <header className={styles.header}>

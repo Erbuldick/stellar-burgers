@@ -2,10 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getFeedsApi } from '../../utils/burger-api';
 import { TOrder } from '@utils-types';
 
-export const fetchFeeds = createAsyncThunk('feed/fetch', async () => {
-  const data = await getFeedsApi();
-  return data;
-});
+export const fetchFeeds = createAsyncThunk('feed/fetch', getFeedsApi);
 
 interface IFeedState {
   orders: TOrder[];
@@ -20,16 +17,16 @@ const initialState: IFeedState = {
   total: 0,
   totalToday: 0,
   loading: false,
-  error: null,
+  error: null
 };
 
 const feedSlice = createSlice({
   name: 'feed',
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchFeeds.pending, state => {
+      .addCase(fetchFeeds.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -43,7 +40,7 @@ const feedSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Ошибка загрузки ленты';
       });
-  },
+  }
 });
 
 export const selectFeed = (state: { feed: IFeedState }) => state.feed;

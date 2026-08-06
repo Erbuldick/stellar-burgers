@@ -1,7 +1,7 @@
 import React, { FC, memo } from 'react';
 import {
   CurrencyIcon,
-  FormattedDate,
+  FormattedDate
 } from '@zlden/react-developer-burger-ui-components';
 
 import styles from './order-info.module.css';

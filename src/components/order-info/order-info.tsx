@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '../../services/store';
 import {
   fetchOrderByNumber,
   selectOrderDetails,
-  clearOrderDetails,
+  clearOrderDetails
 } from '../../services/slices/orderDetailsSlice';
 import { selectIngredients } from '../../services/slices/ingredientsSlice';
 import { Preloader } from '../ui/preloader';
@@ -26,12 +26,10 @@ export const OrderInfo: FC = () => {
     };
   }, [dispatch, number]);
 
-  
   if (loading || !order) {
     return <Preloader />;
   }
 
-  
   const date = new Date(order.createdAt);
   type TIngredientsWithCount = {
     [key: string]: TIngredient & { count: number };
@@ -40,11 +38,11 @@ export const OrderInfo: FC = () => {
   const ingredientsInfo = order.ingredients.reduce(
     (acc: TIngredientsWithCount, item) => {
       if (!acc[item]) {
-        const ingredient = ingredients.find(ing => ing._id === item);
+        const ingredient = ingredients.find((ing) => ing._id === item);
         if (ingredient) {
           acc[item] = {
             ...ingredient,
-            count: 1,
+            count: 1
           };
         }
       } else {
@@ -64,7 +62,7 @@ export const OrderInfo: FC = () => {
     ...order,
     ingredientsInfo,
     date,
-    total,
+    total
   };
 
   return <OrderInfoUI orderInfo={orderInfo} />;

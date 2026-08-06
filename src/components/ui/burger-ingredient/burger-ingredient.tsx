@@ -4,7 +4,7 @@ import styles from './burger-ingredient.module.css';
 import {
   Counter,
   CurrencyIcon,
-  AddButton,
+  AddButton
 } from '@zlden/react-developer-burger-ui-components';
 import { TBurgerIngredientUIProps } from './type';
 

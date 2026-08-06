@@ -4,10 +4,7 @@ import { TOrder } from '@utils-types';
 
 export const fetchProfileOrders = createAsyncThunk(
   'profileOrders/fetch',
-  async () => {
-    const orders = await getOrdersApi();
-    return orders;
-  }
+  getOrdersApi
 );
 
 interface IProfileOrdersState {
@@ -19,16 +16,16 @@ interface IProfileOrdersState {
 const initialState: IProfileOrdersState = {
   orders: [],
   loading: false,
-  error: null,
+  error: null
 };
 
 const profileOrdersSlice = createSlice({
   name: 'profileOrders',
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchProfileOrders.pending, state => {
+      .addCase(fetchProfileOrders.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -43,7 +40,7 @@ const profileOrdersSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Ошибка загрузки истории заказов';
       });
-  },
+  }
 });
 
 export const selectProfileOrders = (state: {

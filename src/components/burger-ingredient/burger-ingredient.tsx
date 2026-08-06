@@ -6,7 +6,7 @@ import { BurgerIngredientUI } from '../ui/burger-ingredient';
 export const BurgerIngredient: FC<TBurgerIngredientProps> = ({
   ingredient,
   count,
-  onAdd,
+  onAdd
 }) => {
   const location = useLocation();
 
@@ -15,7 +15,7 @@ export const BurgerIngredient: FC<TBurgerIngredientProps> = ({
       ingredient={ingredient}
       count={count}
       handleAdd={onAdd}
-      locationState={location}
+      locationState={{ background: location }}
     />
   );
 };

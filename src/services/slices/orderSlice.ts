@@ -4,7 +4,7 @@ import { TOrder } from '@utils-types';
 
 export const createOrder = createAsyncThunk<TOrder, string[]>(
   'order/create',
-  async ingredientsIds => {
+  async (ingredientsIds) => {
     const response = await orderBurgerApi(ingredientsIds);
     return response.order as unknown as TOrder;
   }
@@ -19,24 +19,24 @@ interface IOrderState {
 const initialState: IOrderState = {
   order: null,
   loading: false,
-  error: null,
+  error: null
 };
 
 const orderSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {
-    clearOrder: state => {
+    clearOrder: (state) => {
       state.order = null;
       state.error = null;
     },
-    closeOrder: state => {
+    closeOrder: (state) => {
       state.order = null;
-    },
+    }
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(createOrder.pending, state => {
+      .addCase(createOrder.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -51,7 +51,7 @@ const orderSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Ошибка создания заказа';
       });
-  },
+  }
 });
 
 export const { clearOrder, closeOrder } = orderSlice.actions;

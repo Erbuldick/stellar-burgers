@@ -3,13 +3,12 @@ import { BurgerIngredientUI } from '@ui';
 import type { Meta, StoryObj } from '@storybook/react';
 import { Location } from 'react-router-dom';
 
-
 const mockLocation: Location = {
   pathname: '/',
   search: '',
   hash: '',
   state: null,
-  key: 'default',
+  key: 'default'
 };
 
 const meta = {
@@ -17,15 +16,15 @@ const meta = {
   component: BurgerIngredientUI,
   tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
+    layout: 'fullscreen'
   },
   decorators: [
     (Story) => (
       <div style={{ width: 'fit-content', margin: 20 }}>
         <Story />
       </div>
-    ),
-  ],
+    )
+  ]
 } satisfies Meta<typeof BurgerIngredientUI>;
 
 export default meta;
@@ -44,10 +43,10 @@ export const DefaultIngredient: Story = {
       price: 123,
       image: '',
       image_large: '',
-      image_mobile: '',
+      image_mobile: ''
     },
     count: 2,
-    handleAdd: () => {},       
-    locationState: mockLocation, 
-  },
+    handleAdd: () => {},
+    locationState: mockLocation
+  }
 };

@@ -32,10 +32,9 @@
     "react/jsx-key": "warn",
     "react/jsx-max-props-per-line": ["warn", { "maximum": 7 }],
     "react/jsx-max-depth": ["warn", { "max": 8 }],
-    "arrow-body-style": "off",
-    "no-unused-vars": "warn",
+    "arrow-body-style": ["warn", "as-needed"],
     "dot-notation": "warn",
-    "jsx-quotes": "off",
+    "jsx-quotes": ["warn", "prefer-single"],
     "valid-typeof": "warn",
     "@typescript-eslint/member-ordering": [
       "warn",

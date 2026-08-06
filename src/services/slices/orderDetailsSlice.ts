@@ -4,7 +4,7 @@ import { TOrder } from '@utils-types';
 
 export const fetchOrderByNumber = createAsyncThunk<TOrder, number>(
   'orderDetails/fetch',
-  async number => {
+  async (number) => {
     const response = await getOrderByNumberApi(number);
     if (!response.success) throw new Error('Ошибка загрузки заказа');
     return response.orders[0];
@@ -20,22 +20,22 @@ interface IOrderDetailsState {
 const initialState: IOrderDetailsState = {
   order: null,
   loading: false,
-  error: null,
+  error: null
 };
 
 const orderDetailsSlice = createSlice({
   name: 'orderDetails',
   initialState,
   reducers: {
-    clearOrderDetails: state => {
+    clearOrderDetails: (state) => {
       state.order = null;
       state.error = null;
       state.loading = false;
-    },
+    }
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchOrderByNumber.pending, state => {
+      .addCase(fetchOrderByNumber.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -50,7 +50,7 @@ const orderDetailsSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Ошибка загрузки заказа';
       });
-  },
+  }
 });
 
 export const { clearOrderDetails } = orderDetailsSlice.actions;

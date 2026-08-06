@@ -12,7 +12,7 @@ export const BurgerIngredients: FC = () => {
   const ingredients = useSelector(selectIngredients) || [];
   const constructorState = useSelector(selectConstructor) || {
     bun: null,
-    ingredients: [],
+    ingredients: []
   };
   console.log('constructor state:', constructorState);
   const bun = constructorState.bun;
@@ -59,7 +59,7 @@ export const BurgerIngredients: FC = () => {
 
   const ingredientsCounters = useMemo(() => {
     const counters: { [key: string]: number } = {};
-    constructorIngredients.forEach(ingredient => {
+    constructorIngredients.forEach((ingredient) => {
       if (!counters[ingredient._id]) counters[ingredient._id] = 0;
       counters[ingredient._id]++;
     });

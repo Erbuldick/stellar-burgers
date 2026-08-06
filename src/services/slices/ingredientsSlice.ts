@@ -4,10 +4,7 @@ import { TIngredient } from '../../utils/types';
 
 export const fetchIngredients = createAsyncThunk(
   'ingredients/fetch',
-  async () => {
-    const data = await getIngredientsApi();
-    return data;
-  }
+  getIngredientsApi
 );
 
 interface IIngredientsState {
@@ -19,16 +16,16 @@ interface IIngredientsState {
 const initialState: IIngredientsState = {
   items: [],
   loading: false,
-  error: null,
+  error: null
 };
 
 const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchIngredients.pending, state => {
+      .addCase(fetchIngredients.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -43,7 +40,7 @@ const ingredientsSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Ошибка загрузки ингредиентов';
       });
-  },
+  }
 });
 
 export const selectIngredients = (state: { ingredients: IIngredientsState }) =>
