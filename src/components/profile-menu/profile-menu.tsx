@@ -14,7 +14,7 @@ export const ProfileMenu: FC = () => {
     dispatch(logoutUser())
       .unwrap()
       .then(() => {
-        navigate('/login');
+        navigate('/login', { replace: true });
       })
       .catch((err) => {
         const errorMessage = err?.message || 'Ошибка при выходе ¯_(ツ)_/¯';

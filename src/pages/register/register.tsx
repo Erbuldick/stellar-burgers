@@ -17,7 +17,6 @@ export const Register: FC = () => {
     e.preventDefault();
     dispatch(registerUser({ email, name: userName, password }))
       .unwrap()
-      .then(() => navigate('/'))
       .catch(() => {});
   };
 

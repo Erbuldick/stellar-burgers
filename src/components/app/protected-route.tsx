@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from '../../services/store';
 import {
   selectIsAuthenticated,
-  selectUserLoading
+  selectIsAuthChecked
 } from '../../services/slices/userSlice';
 import { Preloader } from '@ui';
 
@@ -16,20 +16,20 @@ const ProtectedRoute = ({
   onlyUnAuth = false
 }: TProtectedRouteProps) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
-  const loading = useSelector(selectUserLoading);
+  const isAuthChecked = useSelector(selectIsAuthChecked);
   const location = useLocation();
 
-  if (loading) {
+  if (!isAuthChecked) {
     return <Preloader />;
   }
 
   if (!isAuthenticated && !onlyUnAuth) {
-    return <Navigate to='/login' state={{ from: location }} />;
+    return <Navigate to='/login' state={{ from: location }} replace />;
   }
 
   if (isAuthenticated && onlyUnAuth) {
     const from = location.state?.from?.pathname || '/';
-    return <Navigate to={from} />;
+    return <Navigate to={from} replace />;
   }
 
   return children;

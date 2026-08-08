@@ -56,13 +56,15 @@ interface IUserState {
   isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
+  isAuthChecked: boolean;
 }
 
 const initialState: IUserState = {
   user: null,
   isAuthenticated: false,
   loading: false,
-  error: null
+  error: null,
+  isAuthChecked: false
 };
 
 const userSlice = createSlice({
@@ -118,10 +120,12 @@ const userSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
+        state.isAuthChecked = true;
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || 'Ошибка загрузки пользователя';
+        state.isAuthChecked = true;
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true;
@@ -147,5 +151,7 @@ export const selectUserLoading = (state: { user: IUserState }) =>
   state.user.loading;
 export const selectUserError = (state: { user: IUserState }) =>
   state.user.error;
+export const selectIsAuthChecked = (state: { user: IUserState }) =>
+  state.user.isAuthChecked;
 
 export default userSlice.reducer;

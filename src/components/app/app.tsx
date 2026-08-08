@@ -37,9 +37,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchIngredients());
-    if (getCookie('accessToken')) {
-      dispatch(fetchUser());
-    }
+    dispatch(fetchUser());
   }, [dispatch]);
 
   const handleModalClose = () => {
