@@ -5,7 +5,8 @@ import { ProfileMenuUIProps } from './type';
 
 export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
   pathname,
-  handleLogout
+  handleLogout,
+  logoutError
 }) => (
   <>
     <NavLink
@@ -35,6 +36,11 @@ export const ProfileMenuUI: FC<ProfileMenuUIProps> = ({
     >
       Выход
     </button>
+    {logoutError && (
+      <p className='text text_type_main-default text_color_error pt-2'>
+        {logoutError}
+      </p>
+    )}
     <p className='pt-20 text text_type_main-default text_color_inactive'>
       {pathname === '/profile'
         ? 'В этом разделе вы можете изменить свои персональные данные'

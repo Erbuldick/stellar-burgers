@@ -1,14 +1,21 @@
 import React from 'react';
 import { BurgerIngredientUI } from '@ui';
 import type { Meta, StoryObj } from '@storybook/react';
+import { Location } from 'react-router-dom';
+
+const mockLocation: Location = {
+  pathname: '/',
+  search: '',
+  hash: '',
+  state: null,
+  key: 'default'
+};
 
 const meta = {
   title: 'Example/BurgerIngredient',
   component: BurgerIngredientUI,
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ['autodocs'],
   parameters: {
-    // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: 'fullscreen'
   },
   decorators: [
@@ -39,15 +46,7 @@ export const DefaultIngredient: Story = {
       image_mobile: ''
     },
     count: 2,
-    locationState: {
-      background: {
-        hash: '',
-        key: 'eitkep27',
-        pathname: '/',
-        search: '',
-        state: null
-      }
-    },
-    handleAdd: () => {}
+    handleAdd: () => {},
+    locationState: mockLocation
   }
 };
