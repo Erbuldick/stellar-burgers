@@ -59,9 +59,9 @@ describe('constructorSlice', () => {
 
   it('should add ingredient (with generated id)', () => {
     const action = addIngredient(mockIngredient);
-    expect((action.payload as any).id).toBeDefined();
     const state = constructorReducer(initialState, action);
     expect(state.ingredients).toHaveLength(1);
+    expect(state.ingredients[0].id).toBe('mocked-uuid');
     expect(state.ingredients[0]._id).toBe(mockIngredient._id);
   });
 
